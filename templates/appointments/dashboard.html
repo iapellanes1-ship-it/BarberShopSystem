@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - BarberAxis{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <h1>BarberAxis</h1>
+    <p>Experience luxury grooming with precision craftsmanship. Book your transformation today.</p>
+    <a href="{% url 'appointment_book' %}" class="btn btn-large">Book Appointment</a>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+    <div class="services-grid">
+        <div class="service-card">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">✂️</div>
+            <h3>Classic Haircut</h3>
+            <p>Precision haircut tailored to your style. Includes neck trim and hot towel finish.</p>
+            <span style="color: #d4af37; font-weight: 600; font-size: 1.2rem;">₱100</span>
+        </div>
+        <div class="service-card">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🪒</div>
+            <h3>Beard Trim</h3>
+            <p>Expert beard shaping and detailing. Straight razor finish for perfection.</p>
+            <span style="color: #d4af37; font-weight: 600; font-size: 1.2rem;">₱35</span>
+        </div>
+        <div class="service-card">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">💈</div>
+            <h3>Hot Shave</h3>
+            <p>Traditional hot towel shave with pre-shave oil and aftershave balm.</p>
+            <span style="color: #d4af37; font-weight: 600; font-size: 1.2rem;">₱50</span>
+        </div>
+        <div class="service-card">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">⚡</div>
+            <h3>The Works</h3>
+            <p>Haircut, beard trim & hot shave combo. Ultimate grooming experience.</p>
+            <span style="color: #d4af37; font-weight: 600; font-size: 1.2rem;">₱149</span>
+        </div>
+    </div>
+</section>
+
+<!-- Appointments Section -->
+<section class="appointments-section">
+    <h2>Your Upcoming Appointments</h2>
+    {% if appointments %}
+        <table class="appointments-table">
+            <thead>
+                <tr>
+                    <th>Barber</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.barber_name }}</td>
+                    <td>{{ appointment.service_type }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>{{ appointment.timeslot }}</td>
+                    <td>
+                        <span style="color: #27ae60; font-weight: 600;">Confirmed</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div style="text-align: center; padding: 3rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+            <h3 style="color: white; margin-bottom: 1rem;">No appointments yet</h3>
+            <a href="{% url 'appointment_book' %}" class="btn">Book Your First Appointment</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

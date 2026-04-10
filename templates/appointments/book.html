@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Appointment - BarberAxis{% endblock %}
+
+
+{% block content %}
+<div class="form-section">
+    <h2>Book Your Appointment</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.client.id_for_label }}">Client</label>
+            {{ form.client }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.barber_name.id_for_label }}">Barber</label>
+            {{ form.barber_name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.service_type.id_for_label }}">Service Type</label>
+            {{ form.service_type }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.date.id_for_label }}">Date</label>
+            {{ form.date }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.timeslot.id_for_label }}">Time Slot</label>
+            {{ form.timeslot }}
+        </div>
+        {% if form.non_field_errors %}
+            <div style="background: #fee; color: #c33; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem;">Confirm Booking</button>
+    </form>
+    <p style="text-align: center; margin-top: 1.5rem;">
+        <a href="{% url 'dashboard' %}" class="btn" style="background: #666; width: 48%; display: inline-block;">Back to Dashboard</a>
+    </p>
+</div>
+{% endblock %}
